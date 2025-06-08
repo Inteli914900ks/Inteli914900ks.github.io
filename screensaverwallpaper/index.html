@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse-Following YouTube Video</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      background-color: #111;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .video-iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 150vw;
+      height: 150vh;
+      pointer-events: none;
+      transition: transform 0.1s ease-out;
+      will-change: transform;
+    }
+  </style>
+</head>
+<body>
+  <div class="video-container">
+    <iframe
+      class="video-iframe"
+      src="https://www.youtube.com/embed/or9NlUR0cQY?autoplay=1&mute=1&loop=1&playlist=or9NlUR0cQY&controls=0&showinfo=0&modestbranding=1&rel=0"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+  <script>
+    const iframe = document.querySelector('.video-iframe');
+
+    window.addEventListener('mousemove', (e) => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+
+      const iframeW = iframe.offsetWidth;
+      const iframeH = iframe.offsetHeight;
+
+      const maxX = iframeW - vw;
+      const maxY = iframeH - vh;
+
+      const percentX = e.clientX / vw;
+      const percentY = e.clientY / vh;
+
+      const offsetX = -maxX * percentX;
+      const offsetY = -maxY * percentY;
+
+      iframe.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+  </script>
+</body>
+</html>
