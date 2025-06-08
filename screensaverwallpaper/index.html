@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Centered Parallax Image</title>
+  <title>Wallpaper Follow Mouse</title>
   <style>
     html, body {
       margin: 0;
@@ -11,21 +11,22 @@
       height: 100%;
       background-color: #111;
     }
+
     .parallax-container {
+      position: relative;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
-      position: relative;
     }
+
     .parallax-image {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 0;
+      left: 0;
       width: 150vw;
       height: auto;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease-out;
       will-change: transform;
+      transition: transform 0.1s ease-out;
     }
   </style>
 </head>
@@ -37,21 +38,25 @@
   <script>
     const image = document.querySelector('.parallax-image');
 
-    document.addEventListener('mousemove', (e) => {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
+    function updateImagePosition(e) {
+      const containerWidth = window.innerWidth;
+      const containerHeight = window.innerHeight;
+      const imageWidth = image.clientWidth;
+      const imageHeight = image.clientHeight;
 
-      const maxOffsetX = (image.clientWidth - window.innerWidth) / 2;
-      const maxOffsetY = (image.clientHeight - window.innerHeight) / 2;
+      const maxOffsetX = imageWidth - containerWidth;
+      const maxOffsetY = imageHeight - containerHeight;
 
-      const percentX = (e.clientX - centerX) / centerX;
-      const percentY = (e.clientY - centerY) / centerY;
+      const percentX = e.clientX / containerWidth;
+      const percentY = e.clientY / containerHeight;
 
-      const offsetX = -50 + percentX * maxOffsetX / image.clientWidth * 100;
-      const offsetY = -50 + percentY * maxOffsetY / image.clientHeight * 100;
+      const offsetX = -maxOffsetX * percentX;
+      const offsetY = -maxOffsetY * percentY;
 
-      image.style.transform = `translate(${offsetX}%, ${offsetY}%)`;
-    });
+      image.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    }
+
+    window.addEventListener('mousemove', updateImagePosition);
   </script>
 </body>
 </html>
