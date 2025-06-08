@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Wallpaper Follow Mouse</title>
+  <title>Mouse-Following YouTube Video</title>
   <style>
     html, body {
       margin: 0;
@@ -12,51 +12,57 @@
       background-color: #111;
     }
 
-    .parallax-container {
+    .video-container {
       position: relative;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
     }
 
-    .parallax-image {
+    .video-iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 150vw;
-      height: auto;
-      will-change: transform;
+      height: 150vh;
+      pointer-events: none; /* So mouse can pass through */
       transition: transform 0.1s ease-out;
+      will-change: transform;
     }
   </style>
 </head>
 <body>
-  <div class="parallax-container">
-    <img class="parallax-image" src="https://4kwallpapers.com/images/walls/thumbs_3t/11573.jpg" alt="Wallpaper">
+  <div class="video-container">
+    <iframe
+      class="video-iframe"
+      src="https://www.youtube.com/embed/or9NlUR0cQY?autoplay=1&mute=1&loop=1&playlist=or9NlUR0cQY&controls=0&showinfo=0&modestbranding=1&rel=0"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+    ></iframe>
   </div>
 
   <script>
-    const image = document.querySelector('.parallax-image');
+    const iframe = document.querySelector('.video-iframe');
 
-    function updateImagePosition(e) {
-      const containerWidth = window.innerWidth;
-      const containerHeight = window.innerHeight;
-      const imageWidth = image.clientWidth;
-      const imageHeight = image.clientHeight;
+    window.addEventListener('mousemove', (e) => {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
 
-      const maxOffsetX = imageWidth - containerWidth;
-      const maxOffsetY = imageHeight - containerHeight;
+      const iframeW = iframe.offsetWidth;
+      const iframeH = iframe.offsetHeight;
 
-      const percentX = e.clientX / containerWidth;
-      const percentY = e.clientY / containerHeight;
+      const maxX = iframeW - vw;
+      const maxY = iframeH - vh;
 
-      const offsetX = -maxOffsetX * percentX;
-      const offsetY = -maxOffsetY * percentY;
+      const percentX = e.clientX / vw;
+      const percentY = e.clientY / vh;
 
-      image.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-    }
+      const offsetX = -maxX * percentX;
+      const offsetY = -maxY * percentY;
 
-    window.addEventListener('mousemove', updateImagePosition);
+      iframe.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
   </script>
 </body>
 </html>
