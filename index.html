@@ -6,19 +6,24 @@
   <title>Countdown</title>
   <style>
     body {
-      background-color: black;
-      color: white;
-      font-family: monospace;
+      margin: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      font-family: monospace;
+      color: white;
       font-size: 3rem;
-      text-align: center;
+      background: url('https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638886205/EducationHub/photos/rainbow-river.jpg') no-repeat center center fixed;
+      background-size: cover;
+      backdrop-filter: brightness(0.4); /* dim for readability */
     }
+
     #countdown {
-      line-height: 1.4;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+      text-align: center;
+      padding: 1rem;
+      border-radius: 12px;
     }
   </style>
 </head>
@@ -29,13 +34,13 @@
     function getTargetTime() {
       const now = new Date();
 
-      // Set the target time to 18 days from now, at 13:40 CET/CEST
+      // Set target to 18 days from now at 13:40 CET/CEST (11:40 UTC)
       const target = new Date(
         Date.UTC(
           now.getUTCFullYear(),
           now.getUTCMonth(),
           now.getUTCDate() + 18,
-          11, 40, 0, 0 // 13:40 CET/CEST = 11:40 UTC
+          11, 40, 0, 0
         )
       );
 
@@ -63,7 +68,7 @@
         `${days}d ${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
     }
 
-    setInterval(updateCountdown, 25); // update every 25ms for a smooth display
+    setInterval(updateCountdown, 25);
   </script>
 </body>
 </html>
