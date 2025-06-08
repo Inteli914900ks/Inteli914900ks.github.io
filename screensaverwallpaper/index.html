@@ -2,20 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Image at 500%</title>
+  <title>Image Parallax</title>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
       background-color: #111;
-      overflow: auto;
     }
-    img {
+    .parallax-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    .parallax-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(-25%, -25%);
       width: 150vw;
       height: auto;
+      transition: transform 0.1s ease-out;
     }
   </style>
 </head>
 <body>
-  <img src="https://4kwallpapers.com/images/walls/thumbs_3t/11573.jpg" alt="Wallpaper">
+  <div class="parallax-container">
+    <img class="parallax-image" src="https://4kwallpapers.com/images/walls/thumbs_3t/11573.jpg" alt="Wallpaper">
+  </div>
+
+  <script>
+    const image = document.querySelector('.parallax-image');
+
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 50;
+      const y = (e.clientY / window.innerHeight - 0.5) * 50;
+      image.style.transform = `translate(${-25 - x}%, ${-25 - y}%)`;
+    });
+  </script>
 </body>
 </html>
