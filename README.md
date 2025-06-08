@@ -1,1 +1,0 @@
-# Inteli914900ks.github.io
