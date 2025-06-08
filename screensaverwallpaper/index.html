@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Mouse-Following Local Video</title>
+  <meta charset="UTF-8">
+  <title>Mouse-Following YouTube Video</title>
   <style>
     html, body {
       margin: 0;
@@ -11,19 +11,20 @@
       height: 100%;
       background-color: #111;
     }
+
     .video-container {
       position: relative;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
     }
-    video {
+
+    .video-iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 150vw;
-      height: auto;
-      object-fit: cover;
+      height: 150vh;
       pointer-events: none;
       transition: transform 0.1s ease-out;
       will-change: transform;
@@ -32,26 +33,27 @@
 </head>
 <body>
   <div class="video-container">
-    <video id="bg-video" autoplay muted loop playsinline>
-      <source src="./video.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <iframe
+      class="video-iframe"
+      src="https://www.youtube.com/embed/or9NlUR0cQY?autoplay=1&mute=1&loop=1&playlist=or9NlUR0cQY&controls=0&showinfo=0&modestbranding=1&rel=0"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+    ></iframe>
   </div>
 
   <script>
-    const video = document.getElementById('bg-video');
-
-    video.onerror = () => console.log('Video failed to load!');
+    const iframe = document.querySelector('.video-iframe');
 
     window.addEventListener('mousemove', (e) => {
       const vw = window.innerWidth;
       const vh = window.innerHeight;
 
-      const videoW = video.offsetWidth;
-      const videoH = video.offsetHeight;
+      const iframeW = iframe.offsetWidth;
+      const iframeH = iframe.offsetHeight;
 
-      const maxX = videoW - vw;
-      const maxY = videoH - vh;
+      const maxX = iframeW - vw;
+      const maxY = iframeH - vh;
 
       const percentX = e.clientX / vw;
       const percentY = e.clientY / vh;
@@ -59,7 +61,7 @@
       const offsetX = -maxX * percentX;
       const offsetY = -maxY * percentY;
 
-      video.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+      iframe.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
     });
   </script>
 </body>
