@@ -16,7 +16,7 @@
       font-size: 3rem;
       background: url('https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638886205/EducationHub/photos/rainbow-river.jpg') no-repeat center center fixed;
       background-size: cover;
-      backdrop-filter: brightness(0.4); /* dim for readability */
+      backdrop-filter: brightness(0.4);
     }
 
     #countdown {
@@ -34,7 +34,6 @@
     function getTargetTime() {
       const now = new Date();
 
-      // Set target to 18 days from now at 13:40 CET/CEST (11:40 UTC)
       const target = new Date(
         Date.UTC(
           now.getUTCFullYear(),
