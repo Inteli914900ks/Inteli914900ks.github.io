@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Image Parallax</title>
+  <title>Centered Parallax Image</title>
   <style>
     html, body {
       margin: 0;
@@ -12,19 +12,20 @@
       background-color: #111;
     }
     .parallax-container {
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       overflow: hidden;
       position: relative;
     }
     .parallax-image {
       position: absolute;
-      top: 0;
-      left: 0;
-      transform: translate(-25%, -25%);
+      top: 50%;
+      left: 50%;
       width: 150vw;
       height: auto;
+      transform: translate(-50%, -50%);
       transition: transform 0.1s ease-out;
+      will-change: transform;
     }
   </style>
 </head>
@@ -37,9 +38,19 @@
     const image = document.querySelector('.parallax-image');
 
     document.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 50;
-      const y = (e.clientY / window.innerHeight - 0.5) * 50;
-      image.style.transform = `translate(${-25 - x}%, ${-25 - y}%)`;
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+
+      const maxOffsetX = (image.clientWidth - window.innerWidth) / 2;
+      const maxOffsetY = (image.clientHeight - window.innerHeight) / 2;
+
+      const percentX = (e.clientX - centerX) / centerX;
+      const percentY = (e.clientY - centerY) / centerY;
+
+      const offsetX = -50 + percentX * maxOffsetX / image.clientWidth * 100;
+      const offsetY = -50 + percentY * maxOffsetY / image.clientHeight * 100;
+
+      image.style.transform = `translate(${offsetX}%, ${offsetY}%)`;
     });
   </script>
 </body>
