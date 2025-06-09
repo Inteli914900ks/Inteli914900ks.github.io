@@ -9,53 +9,62 @@
       margin: 0;
       height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       font-family: monospace;
       color: white;
-      font-size: 3rem;
+      font-size: 2.5rem;
       background: url('https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638886205/EducationHub/photos/rainbow-river.jpg') no-repeat center center fixed;
       background-size: cover;
       backdrop-filter: brightness(0.4);
     }
 
-    #countdown {
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+    .timer-box {
       text-align: center;
-      padding: 1rem;
-      border-radius: 12px;
+      margin: 1rem;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+    }
+
+    .timer-title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
   </style>
 </head>
 <body>
-  <div id="countdown">Loading...</div>
+
+  <div class="timer-box">
+    <div class="timer-title">Timer 1</div>
+    <div id="countdown1">Loading...</div>
+  </div>
+
+  <div class="timer-box">
+    <div class="timer-title">JS Timer 2</div>
+    <div id="countdown2">Loading...</div>
+  </div>
 
   <script>
-    function getTargetTime() {
+    function getTargetTime1() {
       const now = new Date();
-
-      const target = new Date(
-        Date.UTC(
-          now.getUTCFullYear(),
-          now.getUTCMonth(),
-          now.getUTCDate() + 18,
-          11, 40, 0, 0
-        )
-      );
-
-      return target;
+      return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 18, 11, 40, 0));
     }
 
-    const targetTime = getTargetTime();
+    function getTargetTime2(timer1Date) {
+      const parisTime = new Date(timer1Date.getTime() + 2 * 24 * 60 * 60 * 1000);
+      const options = { timeZone: 'Europe/Paris', hour12: false };
+      const parisStr = parisTime.toLocaleDateString('en-CA', options).replace(/\//g, '-') + 'T13:00:00';
+      return new Date(new Date(parisStr + '+01:00').toISOString());
+    }
 
-    function updateCountdown() {
+    const targetTime1 = getTargetTime1();
+    const targetTime2 = getTargetTime2(targetTime1);
+
+    function formatCountdown(targetTime) {
       const now = new Date();
       const diff = targetTime - now;
 
-      if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "Time's up!";
-        return;
-      }
+      if (diff <= 0) return "Time's up!";
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
@@ -63,11 +72,15 @@
       const seconds = Math.floor((diff / 1000) % 60);
       const milliseconds = Math.floor(diff % 1000).toString().padStart(3, '0');
 
-      document.getElementById("countdown").innerHTML =
-        `${days}d ${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
+      return `${days}d ${hours}h ${minutes}m ${seconds}s ${milliseconds}ms`;
     }
 
-    setInterval(updateCountdown, 25);
+    function updateCountdowns() {
+      document.getElementById("countdown1").innerHTML = formatCountdown(targetTime1);
+      document.getElementById("countdown2").innerHTML = formatCountdown(targetTime2);
+    }
+
+    setInterval(updateCountdowns, 25);
   </script>
 </body>
 </html>
