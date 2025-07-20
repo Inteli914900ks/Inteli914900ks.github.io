@@ -29,29 +29,29 @@
 
     .button-bar {
       display: flex;
-      flex-wrap: wrap; /* Allow wrapping on small screens */
+      justify-content: center;
+      flex-wrap: wrap;
       background-color: #222222;
+      padding: 10px;
+      gap: 10px;
     }
 
     .button-bar button {
-      flex: 1 1 25%; /* Allow buttons to shrink and wrap */
-      min-width: 150px;
-      max-width: 100%;
-      padding: 12px;
+      width: 200px;
+      padding: 15px;
       font-size: 20px;
-      white-space: nowrap; /* Prevent text wrapping */
       border: none;
       background-color: #238EA9;
       color: #ffffff;
       cursor: pointer;
-      transition: flex 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+      transition: background-color 0.2s ease, color 0.2s ease;
       appearance: none;
       font-family: 'Barlow', sans-serif;
       font-weight: 800;
+      white-space: nowrap;
     }
 
     .button-bar button:hover {
-      flex: 1.25;
       background-color: #ffffff !important;
       color: #000000 !important;
     }
@@ -60,18 +60,15 @@
       flex: 1;
       padding: 20px;
       overflow: auto;
-      font-family: 'Barlow', sans-serif;
-      font-weight: 800;
     }
 
-    /* 2x Bigger Switch */
     .switch {
       position: fixed;
       bottom: 20px;
       right: 20px;
       width: 120px;
       height: 68px;
-      background-color: #238EA9; /* Greek blue */
+      background-color: #238EA9;
       border: 2px solid black;
       border-radius: 68px;
       cursor: pointer;
@@ -94,7 +91,7 @@
     }
 
     .switch.active {
-      background-color: #B22234; /* USA red */
+      background-color: #B22234;
     }
 
     .switch.active .switch-toggle {
@@ -111,7 +108,7 @@
       <button data-en="Why Choose Us" data-gr="Γιατι Να Μας Επιλεξετε?">Why Choose Us</button>
     </div>
     <div class="content">
-      <p>Idfk anyMore nuggeT and i can fucking sweaR on A fucking dentist fuckiNg website lmfao cuz im fucking making thiS fucking shit im going insane</p>
+      <p>Changed background color</p>
     </div>
   </div>
 
@@ -143,7 +140,7 @@
       }
     });
 
-    // Set default to Greek
+    // Initialize to Greek
     updateButtonText(false);
   </script>
 </body>
