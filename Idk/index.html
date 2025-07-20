@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Test</title>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wgth@800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wgth@800&display=swap" rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
@@ -58,6 +58,27 @@
       font-family: 'Barlow', sans-serif;
       font-weight: 800;
     }
+
+    /* New styles for the flag toggle button */
+    #flag-toggle {
+      position: fixed;
+      bottom: 20px; /* offset from bottom */
+      right: 20px;  /* offset from right */
+      padding: 10px 15px;
+      font-size: 30px;
+      border: none;
+      background-color: #238EA9;
+      color: white;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    #flag-toggle:hover {
+      background-color: #1a7080;
+    }
   </style>
 </head>
 <body>
@@ -66,11 +87,28 @@
       <button>Our Team</button>
       <button>Home</button>
       <button>Contact Us</button>
-      <button>Why Choose Us</button>
+      <button>Why Choose Us?</button>
     </div>
     <div class="content">
-      <p>Changed background color</p>
+      <p>Testin flags (im a dumbass)</p>
     </div>
   </div>
+
+  <!-- Flag toggle button -->
+  <button id="flag-toggle" aria-label="Toggle Flag">🇬🇷</button>
+
+  <script>
+    const flagBtn = document.getElementById('flag-toggle');
+    let isGreek = true;
+
+    flagBtn.addEventListener('click', () => {
+      if (isGreek) {
+        flagBtn.textContent = '🇺🇸';
+      } else {
+        flagBtn.textContent = '🇬🇷';
+      }
+      isGreek = !isGreek;
+    });
+  </script>
 </body>
 </html>
