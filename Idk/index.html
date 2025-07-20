@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>Test</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wgth@800&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -29,32 +28,27 @@
 
     .button-bar {
       display: flex;
-      flex-wrap: wrap; /* Allow wrapping on small screens */
       background-color: #222222;
     }
 
     .button-bar button {
-      flex: 1 1 25%; /* Allow buttons to shrink and wrap */
-      min-width: 150px;
-      max-width: 100%;
-      padding: 12px;
-      font-size: 20px;
-      white-space: nowrap; /* Prevent text wrapping */
+      flex: 1;
+      padding: 15px;
+      font-size: 25px;
       border: none;
       background-color: #238EA9;
-      color: #ffffff;
+      color: #ffffff; /* Changed from black to white */
       cursor: pointer;
-      transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+      transition: flex 0.2s ease, background-color 0.2s ease, color 0.2s ease;
       appearance: none;
       font-family: 'Barlow', sans-serif;
       font-weight: 800;
     }
 
     .button-bar button:hover {
+      flex: 1.25;
       background-color: #ffffff !important;
-      color: #000000 !important;
-      transform: scale(1.05); /* Prevent layout shift */
-      z-index: 1;
+      color: #000000 !important; /* Black on hover */
     }
 
     .content {
@@ -65,28 +59,28 @@
       font-weight: 800;
     }
 
-    /* 2x Bigger Switch */
+    /* 2x Bigger Switch container */
     .switch {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 120px;
-      height: 68px;
+      width: 120px;  /* doubled from 60 */
+      height: 68px;  /* doubled from 34 */
       background-color: #238EA9; /* Greek blue */
       border: 2px solid black;
-      border-radius: 68px;
+      border-radius: 68px; /* doubled from 34 */
       cursor: pointer;
       transition: background-color 0.3s ease;
       user-select: none;
       display: flex;
       align-items: center;
-      padding: 4px;
-      z-index: 9999;
+      padding: 4px; /* doubled padding */
     }
 
+    /* 2x Bigger toggle circle */
     .switch-toggle {
-      width: 60px;
-      height: 60px;
+      width: 60px;  /* doubled from 30 */
+      height: 60px; /* doubled from 30 */
       background-color: white;
       border-radius: 50%;
       box-shadow: 0 0 4px rgba(0,0,0,0.3);
@@ -94,6 +88,7 @@
       transform: translateX(0);
     }
 
+    /* Active state */
     .switch.active {
       background-color: #B22234; /* USA red */
     }
@@ -112,11 +107,11 @@
       <button data-en="Why Choose Us" data-gr="Γιατι Να Μας Επιλεξετε?">Why Choose Us</button>
     </div>
     <div class="content">
-      <p>Idfk anyMore nuggeT and i can fucking sweaR on A fucking dentist fuckiNg website lmfao cuz im fucking making thiS fucking shit im going insane</p>
+      <p>Changed background color</p>
     </div>
   </div>
 
-  <!-- Language Toggle Switch -->
+  <!-- Switch -->
   <div class="switch" id="flag-switch" role="switch" aria-checked="false" tabindex="0" aria-label="Toggle Greek/American flag colors">
     <div class="switch-toggle"></div>
   </div>
@@ -134,7 +129,7 @@
     switchEl.addEventListener('click', () => {
       const active = switchEl.classList.toggle('active');
       switchEl.setAttribute('aria-checked', active);
-      updateButtonText(active);
+      updateButtonText(active); // active = true means USA (red)
     });
 
     switchEl.addEventListener('keydown', (e) => {
@@ -144,7 +139,7 @@
       }
     });
 
-    // Set default to Greek
+    // Initialize with Greek (blue) text
     updateButtonText(false);
   </script>
 </body>
