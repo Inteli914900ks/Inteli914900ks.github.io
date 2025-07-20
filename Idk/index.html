@@ -27,24 +27,31 @@
     .button-bar {
       display: flex;
       background-color: #e0e0e0;
-      /* no overflow tricks needed */
     }
 
     .button-bar button {
-      /* flex: grow shrink basis */
       flex: 1 1 0;
       padding: 15px;
       font-size: 18px;
       border: none;
-      background-color: #9cdaea; /* default button col */
-      color: #000;
+      background-color: #9cdaea;
+      color: #000000;
       cursor: pointer;
       transition: flex 0.2s ease, background-color 0.2s ease;
+      -webkit-appearance: none;
+         -moz-appearance: none;
+              appearance: none;
+    }
+
+    /* Remove any focus outline */
+    .button-bar button:focus {
+      outline: none;
     }
 
     .button-bar button:hover {
-      flex: 1.25 1 0;           /* grow to 125% width */
-      background-color: #ffffff;/* pure white on hover */
+      flex: 1.25 1 0;                  /* Grow to 125% */
+      background-color: #ffffff !important; /* Force pure white */
+      color: #000000 !important;      /* Ensure text stays black */
     }
 
     .content {
