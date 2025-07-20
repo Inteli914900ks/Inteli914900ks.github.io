@@ -94,20 +94,20 @@
     }
 
     .switch.active .switch-toggle {
-      transform: translateX(52px); /* doubled from 26 + padding adjustment */
+      transform: translateX(52px);
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="button-bar">
-      <button>Our Team</button>
-      <button>Home</button>
-      <button>Contact Us</button>
-      <button>Why Choose Us</button>
+      <button data-en="Our Team" data-gr="Η Ομαδα Μας">Our Team</button>
+      <button data-en="Home" data-gr="Αρχικη Σεληδα">Home</button>
+      <button data-en="Contact Us" data-gr="Επικηνονιστε μαζι μας">Contact Us</button>
+      <button data-en="Why Choose Us" data-gr="Γιατι Να Μας Επιλεξετε?">Why Choose Us</button>
     </div>
     <div class="content">
-      <p>Changed background color</p>
+      <p>Idfk anymore nuggeT and i can fucking sweaR on A fucking dentist fuckiNg website lmfao cuz im fucking making thiS fucking shit im going insane</p>
     </div>
   </div>
 
@@ -118,10 +118,18 @@
 
   <script>
     const switchEl = document.getElementById('flag-switch');
+    const buttons = document.querySelectorAll('.button-bar button');
+
+    function updateButtonText(isAmerican) {
+      buttons.forEach(btn => {
+        btn.textContent = isAmerican ? btn.getAttribute('data-en') : btn.getAttribute('data-gr');
+      });
+    }
 
     switchEl.addEventListener('click', () => {
       const active = switchEl.classList.toggle('active');
       switchEl.setAttribute('aria-checked', active);
+      updateButtonText(active); // active = true means USA (red)
     });
 
     switchEl.addEventListener('keydown', (e) => {
@@ -130,6 +138,9 @@
         switchEl.click();
       }
     });
+
+    // Initialize with Greek (blue) text
+    updateButtonText(false);
   </script>
 </body>
 </html>
