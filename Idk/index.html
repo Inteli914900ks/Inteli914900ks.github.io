@@ -59,33 +59,32 @@
       font-weight: 800;
     }
 
-    /* Switch container */
+    /* 2x Bigger Switch container */
     .switch {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 60px;
-      height: 34px;
+      width: 120px;  /* doubled from 60 */
+      height: 68px;  /* doubled from 34 */
       background-color: #238EA9; /* Greek blue */
       border: 2px solid black;
-      border-radius: 34px;
+      border-radius: 68px; /* doubled from 34 */
       cursor: pointer;
       transition: background-color 0.3s ease;
       user-select: none;
       display: flex;
       align-items: center;
-      padding: 2px;
+      padding: 4px; /* doubled padding */
     }
 
-    /* The toggle circle */
+    /* 2x Bigger toggle circle */
     .switch-toggle {
-      width: 30px;
-      height: 30px;
+      width: 60px;  /* doubled from 30 */
+      height: 60px; /* doubled from 30 */
       background-color: white;
       border-radius: 50%;
       box-shadow: 0 0 4px rgba(0,0,0,0.3);
       transition: transform 0.3s ease;
-      /* Start on left */
       transform: translateX(0);
     }
 
@@ -95,7 +94,7 @@
     }
 
     .switch.active .switch-toggle {
-      transform: translateX(26px); /* Move right */
+      transform: translateX(52px); /* doubled from 26 + padding adjustment */
     }
   </style>
 </head>
@@ -108,7 +107,7 @@
       <button>Why Choose Us</button>
     </div>
     <div class="content">
-      <p>Random Shit I Dont Know Anymore</p>
+      <p>Changed background color</p>
     </div>
   </div>
 
@@ -125,7 +124,6 @@
       switchEl.setAttribute('aria-checked', active);
     });
 
-    // Allow toggle via keyboard (space and enter)
     switchEl.addEventListener('keydown', (e) => {
       if (e.key === ' ' || e.key === 'Enter') {
         e.preventDefault();
