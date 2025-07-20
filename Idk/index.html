@@ -14,6 +14,7 @@
       width: 100%;
       height: 100%;
       font-family: sans-serif;
+      background-color: #9cdaea; /* Main frame background */
     }
 
     .container {
@@ -21,37 +22,33 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      background-color: #9cdaea; /* Main frame background */
     }
 
     .button-bar {
       display: flex;
-      flex-shrink: 0;
       background-color: #e0e0e0;
-      overflow: visible;
+      /* no overflow tricks needed */
     }
 
     .button-bar button {
-      flex: 1;
+      /* flex: grow shrink basis */
+      flex: 1 1 0;
       padding: 15px;
       font-size: 18px;
       border: none;
-      background-color: #9cdaea;
-      color: #000000;
+      background-color: #9cdaea; /* default button col */
+      color: #000;
       cursor: pointer;
-      transition: transform 0.2s ease, background-color 0.2s ease;
-      position: relative;
-      z-index: 0;
+      transition: flex 0.2s ease, background-color 0.2s ease;
     }
 
     .button-bar button:hover {
-      background-color: #ffffff; /* Force white */
-      transform: scale(1.25);
-      z-index: 10;
+      flex: 1.25 1 0;           /* grow to 125% width */
+      background-color: #ffffff;/* pure white on hover */
     }
 
     .content {
-      flex-grow: 1;
+      flex: 1;
       background-color: #ffffff;
       padding: 20px;
       overflow: auto;
