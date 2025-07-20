@@ -44,16 +44,17 @@
       background-color: #238EA9;
       color: #ffffff;
       cursor: pointer;
-      transition: flex 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+      transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
       appearance: none;
       font-family: 'Barlow', sans-serif;
       font-weight: 800;
     }
 
     .button-bar button:hover {
-      flex: 1.25;
       background-color: #ffffff !important;
       color: #000000 !important;
+      transform: scale(1.05); /* Prevent layout shift */
+      z-index: 1;
     }
 
     .content {
