@@ -21,13 +21,14 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      background-color: #9cdaea; /* Main frame background color */
+      background-color: #9cdaea; /* Main frame background */
     }
 
     .button-bar {
       display: flex;
       flex-shrink: 0;
       background-color: #e0e0e0;
+      overflow: visible; /* Ensure overflow doesn't get cut off */
     }
 
     .button-bar button {
@@ -35,15 +36,17 @@
       padding: 15px;
       font-size: 18px;
       border: none;
-      background-color: #9cdaea; /* Default button color */
+      background-color: #9cdaea;
       cursor: pointer;
       transition: transform 0.2s ease, background-color 0.2s ease;
+      position: relative; /* Required for z-index to work */
+      z-index: 0;
     }
 
     .button-bar button:hover {
       background-color: white;
       transform: scale(1.25);
-      z-index: 1; /* Prevent overlap clipping */
+      z-index: 10; /* Brings it to front during hover */
     }
 
     .content {
