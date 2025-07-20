@@ -59,25 +59,43 @@
       font-weight: 800;
     }
 
-    /* New styles for the flag toggle button */
-    #flag-toggle {
+    /* Switch container */
+    .switch {
       position: fixed;
-      bottom: 20px; /* offset from bottom */
-      right: 20px;  /* offset from right */
-      padding: 10px 15px;
-      font-size: 30px;
-      border: none;
-      background-color: #238EA9;
-      color: white;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 34px;
+      background-color: #238EA9; /* Greek blue */
+      border: 2px solid black;
+      border-radius: 34px;
       cursor: pointer;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
       transition: background-color 0.3s ease;
       user-select: none;
+      display: flex;
+      align-items: center;
+      padding: 2px;
     }
 
-    #flag-toggle:hover {
-      background-color: #1a7080;
+    /* The toggle circle */
+    .switch-toggle {
+      width: 30px;
+      height: 30px;
+      background-color: white;
+      border-radius: 50%;
+      box-shadow: 0 0 4px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+      /* Start on left */
+      transform: translateX(0);
+    }
+
+    /* Active state */
+    .switch.active {
+      background-color: #B22234; /* USA red */
+    }
+
+    .switch.active .switch-toggle {
+      transform: translateX(26px); /* Move right */
     }
   </style>
 </head>
@@ -87,27 +105,32 @@
       <button>Our Team</button>
       <button>Home</button>
       <button>Contact Us</button>
-      <button>Why Choose Us?</button>
+      <button>Why Choose Us</button>
     </div>
     <div class="content">
-      <p>Testin flags (im a dumbass)</p>
+      <p>Random Shit I Dont Know Anymore</p>
     </div>
   </div>
 
-  <!-- Flag toggle button -->
-  <button id="flag-toggle" aria-label="Toggle Flag">🇬🇷</button>
+  <!-- Switch -->
+  <div class="switch" id="flag-switch" role="switch" aria-checked="false" tabindex="0" aria-label="Toggle Greek/American flag colors">
+    <div class="switch-toggle"></div>
+  </div>
 
   <script>
-    const flagBtn = document.getElementById('flag-toggle');
-    let isGreek = true;
+    const switchEl = document.getElementById('flag-switch');
 
-    flagBtn.addEventListener('click', () => {
-      if (isGreek) {
-        flagBtn.textContent = '🇺🇸';
-      } else {
-        flagBtn.textContent = '🇬🇷';
+    switchEl.addEventListener('click', () => {
+      const active = switchEl.classList.toggle('active');
+      switchEl.setAttribute('aria-checked', active);
+    });
+
+    // Allow toggle via keyboard (space and enter)
+    switchEl.addEventListener('keydown', (e) => {
+      if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        switchEl.click();
       }
-      isGreek = !isGreek;
     });
   </script>
 </body>
